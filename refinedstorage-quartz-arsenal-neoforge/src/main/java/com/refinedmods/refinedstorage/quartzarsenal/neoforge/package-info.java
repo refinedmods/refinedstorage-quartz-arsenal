@@ -1,0 +1,4 @@
+@ParametersAreNonnullByDefault
+package com.refinedmods.refinedstorage.quartzarsenal.neoforge;
+
+import javax.annotation.ParametersAreNonnullByDefault;

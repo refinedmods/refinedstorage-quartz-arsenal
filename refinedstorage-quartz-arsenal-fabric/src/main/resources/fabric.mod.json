@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "refinedstorage_quartz_arsenal",
+  "version": "${version}",
+  "name": "Refined Storage - Quartz Arsenal",
+  "description": "Quartz Arsenal is an addon for Refined Storage that adds various new tools.",
+  "authors": [
+    "Refined Mods"
+  ],
+  "contact": {
+    "sources": "https://github.com/refinedmods/refinedstorage-quartz-arsenal",
+    "issues": "https://github.com/refinedmods/refinedstorage-quartz-arsenal/issues"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.refinedmods.refinedstorage.quartzarsenal.fabric.ModInitializerImpl"
+    ],
+    "client": [
+      "com.refinedmods.refinedstorage.quartzarsenal.fabric.ClientModInitializerImpl"
+    ]
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discordapp.com/invite/VYzsydb"
+      }
+    }
+  },
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric-api": "*",
+    "minecraft": "~1.21",
+    "java": ">=17"
+  }
+}

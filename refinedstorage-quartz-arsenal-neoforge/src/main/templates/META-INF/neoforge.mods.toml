@@ -1,0 +1,13 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+issueTrackerURL = "https://github.com/refinedmods/refinedstorage-quartz-arsenal"
+license = "MIT"
+[[mods]]
+modId = "refinedstorage_quartz_arsenal"
+version = "${version}"
+displayName = "Refined Storage - Quartz Arsenal"
+displayURL = "https://github.com/refinedmods/refinedstorage-quartz-arsenal"
+authors = "Refined Mods"
+description = '''
+Quartz Arsenal is an addon for Refined Storage that adds various new tools.
+'''

@@ -1,0 +1,11 @@
+plugins {
+    id("refinedarchitect.common")
+}
+
+refinedarchitect {
+    common()
+}
+
+base {
+    archivesName.set("refinedstorage-quartz-arsenal-common")
+}
