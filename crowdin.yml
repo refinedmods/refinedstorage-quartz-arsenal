@@ -1,4 +1,4 @@
-project_identifier: change-me
+project_identifier: refined-storage-quartz-arsenal
 commit_message: "chore: update translation %language% from crowdin"
 append_commit_message: false
 api_key_env: CROWDIN_API_KEY
