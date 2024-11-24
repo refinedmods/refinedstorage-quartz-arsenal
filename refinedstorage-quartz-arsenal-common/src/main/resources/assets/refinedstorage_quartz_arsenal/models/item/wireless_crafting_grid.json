@@ -1,0 +1,17 @@
+{
+  "parent": "item/generated",
+  "overrides": [
+    {
+      "predicate": {
+        "refinedstorage:network_bound_active": 0
+      },
+      "model": "refinedstorage_quartz_arsenal:item/wireless_crafting_grid/inactive"
+    },
+    {
+      "predicate": {
+        "refinedstorage:network_bound_active": 1
+      },
+      "model": "refinedstorage_quartz_arsenal:item/wireless_crafting_grid/active"
+    }
+  ]
+}
