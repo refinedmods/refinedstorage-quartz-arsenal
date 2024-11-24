@@ -19,19 +19,32 @@
     ],
     "client": [
       "com.refinedmods.refinedstorage.quartzarsenal.fabric.ClientModInitializerImpl"
+    ],
+    "refinedstorage_plugin": [
+      "com.refinedmods.refinedstorage.quartzarsenal.fabric.ModInitializerImpl"
+    ],
+    "modmenu": [
+      "com.refinedmods.refinedstorage.quartzarsenal.fabric.ModMenuApiImpl"
     ]
   },
   "custom": {
     "modmenu": {
       "links": {
         "modmenu.discord": "https://discordapp.com/invite/VYzsydb"
-      }
+      },
+      "parent": "refinedstorage"
     }
   },
   "depends": {
     "fabricloader": ">=0.14.6",
     "fabric-api": "*",
     "minecraft": "~1.21",
-    "java": ">=17"
+    "refinedstorage": ">=2.0.0-milestone.4.10",
+    "java": ">=21",
+    "cloth-config2": "*",
+    "team_reborn_energy": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
   }
 }

@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @FieldsAndMethodsAreNonnullByDefault
-package com.refinedmods.refinedstorage.quartzarsenal.common;
+package com.refinedmods.refinedstorage.quartzarsenal.common.wirelesscraftinggrid;
 
 import com.refinedmods.refinedstorage.api.core.FieldsAndMethodsAreNonnullByDefault;
 
