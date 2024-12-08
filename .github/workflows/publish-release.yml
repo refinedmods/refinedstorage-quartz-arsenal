@@ -7,10 +7,11 @@ on:
       - closed
 jobs:
   publish-release:
-    uses: refinedmods/refinedarchitect/.github/workflows/publish-release.yml@v0.19.1
+    uses: refinedmods/refinedarchitect/.github/workflows/publish-release.yml@v0.20.0
     secrets: inherit
     with:
       project-name: 'Refined Storage - Quartz Arsenal'
       announce: true
       mutation-testing: false
       sonarqube: true
+      javadoc: false
