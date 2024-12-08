@@ -14,6 +14,9 @@ repositories {
 
 refinedarchitect {
     common()
+    publishing {
+        maven = true
+    }
 }
 
 base {
