@@ -1,6 +1,7 @@
 package com.refinedmods.refinedstorage.quartzarsenal.common.wirelesscraftinggrid;
 
 import com.refinedmods.refinedstorage.api.autocrafting.preview.Preview;
+import com.refinedmods.refinedstorage.api.autocrafting.task.TaskId;
 import com.refinedmods.refinedstorage.api.core.Action;
 import com.refinedmods.refinedstorage.api.grid.operations.GridOperations;
 import com.refinedmods.refinedstorage.api.grid.operations.NoopGridOperations;
@@ -37,6 +38,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
@@ -59,9 +61,7 @@ class WirelessCraftingGrid implements CraftingGrid {
     private final RecipeMatrix<CraftingRecipe, CraftingInput> craftingRecipe;
     private final SlotReference slotReference;
 
-    WirelessCraftingGrid(final Player player,
-                         final NetworkItemContext context,
-                         final SlotReference slotReference) {
+    WirelessCraftingGrid(final Player player, final NetworkItemContext context, final SlotReference slotReference) {
         this.level = player.level();
         this.context = context;
         this.slotReference = slotReference;
@@ -274,18 +274,30 @@ class WirelessCraftingGrid implements CraftingGrid {
     }
 
     @Override
-    public Optional<Preview> getPreview(final ResourceKey resource, final long amount) {
-        return getAutocrafting().flatMap(component -> component.getPreview(resource, amount));
+    public CompletableFuture<Optional<Preview>> getPreview(final ResourceKey resource, final long amount) {
+        return getAutocrafting()
+            .map(component -> component.getPreview(resource, amount))
+            .orElseGet(() -> CompletableFuture.completedFuture(Optional.empty()));
     }
 
     @Override
-    public boolean startTask(final ResourceKey resource, final long amount) {
-        return getAutocrafting().map(autocrafting -> {
-            if (autocrafting.startTask(resource, amount)) {
+    public CompletableFuture<Long> getMaxAmount(final ResourceKey resourceKey) {
+        return getAutocrafting()
+            .map(component -> component.getMaxAmount(resourceKey))
+            .orElseGet(() -> CompletableFuture.completedFuture(0L));
+    }
+
+    @Override
+    public CompletableFuture<Optional<TaskId>> startTask(final ResourceKey resourceKey,
+                                                         final long amount,
+                                                         final Actor actor,
+                                                         final boolean notify) {
+        return getAutocrafting()
+            .map(component -> component.startTask(resourceKey, amount, actor, notify))
+            .map(taskId -> {
                 context.drainEnergy(Platform.getConfig().getWirelessCraftingGrid().getAutocraftingEnergyUsage());
-                return true;
-            }
-            return false;
-        }).orElse(false);
+                return taskId;
+            })
+            .orElseGet(() -> CompletableFuture.completedFuture(Optional.empty()));
     }
 }
