@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+-   Support for Refined Storage v2.0.0-milestone.4.12.
+
 ## [0.1.1] - 2024-12-08
 
 ## [0.1.0] - 2024-11-24
