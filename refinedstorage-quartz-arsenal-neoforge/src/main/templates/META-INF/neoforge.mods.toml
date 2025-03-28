@@ -6,7 +6,7 @@ license = "MIT"
 modId = "refinedstorage_quartz_arsenal"
 version = "${version}"
 displayName = "Refined Storage - Quartz Arsenal"
-displayURL = "https://refinedmods.com/refined-storage"
+displayURL = "https://refinedmods.com/refined-storage/addons/quartz-arsenal.html"
 authors = "Refined Mods"
 description = '''
 Quartz Arsenal is an addon for Refined Storage that adds various new tools.
