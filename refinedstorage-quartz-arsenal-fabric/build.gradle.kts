@@ -25,6 +25,8 @@ refinedarchitect {
     fabric()
     publishing {
         maven = true
+        curseForge = "1230483"
+        modrinth = "gnwGOmBf"
     }
 }
 

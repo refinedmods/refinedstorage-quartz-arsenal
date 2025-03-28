@@ -12,7 +12,6 @@ Quartz Arsenal is an addon for Refined Storage that adds various new tools.
     - [Issues](https://github.com/refinedmods/refinedstorage-quartz-arsenal/issues)
     - [Refined Mods on GitHub](https://github.com/refinedmods)
 - [Discord](https://discordapp.com/invite/VYzsydb)
-- [Twitter](https://twitter.com/refinedmods)
 
 ## Building
 

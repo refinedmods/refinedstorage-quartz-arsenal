@@ -1,9 +1,9 @@
 package com.refinedmods.refinedstorage.quartzarsenal.common.wirelesscraftinggrid;
 
-import com.refinedmods.refinedstorage.api.grid.operations.GridExtractMode;
-import com.refinedmods.refinedstorage.api.grid.operations.GridInsertMode;
-import com.refinedmods.refinedstorage.api.grid.operations.GridOperations;
-import com.refinedmods.refinedstorage.api.grid.watcher.GridWatcherManager;
+import com.refinedmods.refinedstorage.api.network.impl.node.grid.GridWatcherManager;
+import com.refinedmods.refinedstorage.api.network.node.grid.GridExtractMode;
+import com.refinedmods.refinedstorage.api.network.node.grid.GridInsertMode;
+import com.refinedmods.refinedstorage.api.network.node.grid.GridOperations;
 import com.refinedmods.refinedstorage.api.resource.ResourceKey;
 import com.refinedmods.refinedstorage.api.storage.ExtractableStorage;
 import com.refinedmods.refinedstorage.api.storage.InsertableStorage;
