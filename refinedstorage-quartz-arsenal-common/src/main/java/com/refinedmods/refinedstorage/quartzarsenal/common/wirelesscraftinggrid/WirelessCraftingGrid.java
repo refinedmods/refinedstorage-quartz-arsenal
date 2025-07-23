@@ -1,5 +1,6 @@
 package com.refinedmods.refinedstorage.quartzarsenal.common.wirelesscraftinggrid;
 
+import com.refinedmods.refinedstorage.api.autocrafting.calculation.CancellationToken;
 import com.refinedmods.refinedstorage.api.autocrafting.preview.Preview;
 import com.refinedmods.refinedstorage.api.autocrafting.task.TaskId;
 import com.refinedmods.refinedstorage.api.core.Action;
@@ -274,16 +275,17 @@ class WirelessCraftingGrid implements CraftingGrid {
     }
 
     @Override
-    public CompletableFuture<Optional<Preview>> getPreview(final ResourceKey resource, final long amount) {
+    public CompletableFuture<Optional<Preview>> getPreview(final ResourceKey resource, final long amount,
+                                                           final CancellationToken cancellationToken) {
         return getAutocrafting()
-            .map(component -> component.getPreview(resource, amount))
+            .map(autocrafting -> autocrafting.getPreview(resource, amount, cancellationToken))
             .orElseGet(() -> CompletableFuture.completedFuture(Optional.empty()));
     }
 
     @Override
-    public CompletableFuture<Long> getMaxAmount(final ResourceKey resourceKey) {
+    public CompletableFuture<Long> getMaxAmount(final ResourceKey resource, final CancellationToken cancellationToken) {
         return getAutocrafting()
-            .map(component -> component.getMaxAmount(resourceKey))
+            .map(component -> component.getMaxAmount(resource, cancellationToken))
             .orElseGet(() -> CompletableFuture.completedFuture(0L));
     }
 
@@ -291,9 +293,11 @@ class WirelessCraftingGrid implements CraftingGrid {
     public CompletableFuture<Optional<TaskId>> startTask(final ResourceKey resourceKey,
                                                          final long amount,
                                                          final Actor actor,
-                                                         final boolean notify) {
+                                                         final boolean notify,
+                                                         final CancellationToken cancellationToken) {
         return getAutocrafting()
-            .map(component -> component.startTask(resourceKey, amount, actor, notify))
+            .map(component -> component.startTask(resourceKey, amount, actor, notify,
+                cancellationToken))
             .map(taskId -> {
                 context.drainEnergy(Platform.getConfig().getWirelessCraftingGrid().getAutocraftingEnergyUsage());
                 return taskId;
