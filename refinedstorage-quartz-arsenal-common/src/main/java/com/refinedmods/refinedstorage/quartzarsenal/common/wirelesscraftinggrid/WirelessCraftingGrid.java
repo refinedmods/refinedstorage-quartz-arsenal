@@ -285,7 +285,7 @@ class WirelessCraftingGrid implements CraftingGrid {
     @Override
     public CompletableFuture<Long> getMaxAmount(final ResourceKey resource, final CancellationToken cancellationToken) {
         return getAutocrafting()
-            .map(component -> component.getMaxAmount(resource, cancellationToken))
+            .map(autocrafting -> autocrafting.getMaxAmount(resource, cancellationToken))
             .orElseGet(() -> CompletableFuture.completedFuture(0L));
     }
 
@@ -296,7 +296,7 @@ class WirelessCraftingGrid implements CraftingGrid {
                                                          final boolean notify,
                                                          final CancellationToken cancellationToken) {
         return getAutocrafting()
-            .map(component -> component.startTask(resourceKey, amount, actor, notify,
+            .map(autocrafting -> autocrafting.startTask(resourceKey, amount, actor, notify,
                 cancellationToken))
             .map(taskId -> {
                 context.drainEnergy(Platform.getConfig().getWirelessCraftingGrid().getAutocraftingEnergyUsage());
