@@ -266,6 +266,11 @@ class WirelessCraftingGrid implements CraftingGrid {
             .orElse(EmptyGridOperations.INSTANCE);
     }
 
+    @Override
+    public boolean canMenuStayOpen(final Player player) {
+        return true;
+    }
+
     private GridOperations createGridOperations(final ResourceType resourceType,
                                                 final ServerPlayer player,
                                                 final StorageNetworkComponent rootStorage,
