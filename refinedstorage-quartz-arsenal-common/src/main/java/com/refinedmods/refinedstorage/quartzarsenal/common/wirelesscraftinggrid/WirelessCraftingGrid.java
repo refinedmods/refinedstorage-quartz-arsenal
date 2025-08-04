@@ -213,19 +213,18 @@ class WirelessCraftingGrid implements CraftingGrid {
     @Override
     public void addWatcher(final GridWatcher watcher, final Class<? extends Actor> actorType) {
         context.drainEnergy(Platform.getConfig().getWirelessCraftingGrid().getOpenEnergyUsage());
-        context.resolveNetwork().ifPresent(network -> watchers.addWatcher(
-            watcher,
-            actorType,
-            network.getComponent(StorageNetworkComponent.class)
-        ));
+        final StorageNetworkComponent storage = context.resolveNetwork()
+            .map(network -> network.getComponent(StorageNetworkComponent.class))
+            .orElse(null);
+        watchers.addWatcher(watcher, actorType, storage);
     }
 
     @Override
     public void removeWatcher(final GridWatcher watcher) {
-        context.resolveNetwork().ifPresent(network -> watchers.removeWatcher(
-            watcher,
-            network.getComponent(StorageNetworkComponent.class)
-        ));
+        final StorageNetworkComponent storage = context.resolveNetwork()
+            .map(network -> network.getComponent(StorageNetworkComponent.class))
+            .orElse(null);
+        watchers.removeWatcher(watcher, storage);
     }
 
     @Override
