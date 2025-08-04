@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+-  Fixed crash when closing a Wireless Crafting Grid that became available after opening the GUI.
+
 ## [1.0.3] - 2025-08-03
 
 ### Fixed
