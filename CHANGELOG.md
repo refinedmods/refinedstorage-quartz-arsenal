@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed the Wireless Crafting Grid being unable to be charged on Fabric.
+
 ## [1.0.4] - 2025-08-05
 
 ### Fixed
