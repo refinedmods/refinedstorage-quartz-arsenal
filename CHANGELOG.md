@@ -7,9 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.0.5] - 2025-08-22
+
 ### Fixed
 
-- Fixed the Wireless Crafting Grid being unable to be charged on Fabric.
+-   Fixed the Wireless Crafting Grid being unable to be charged on Fabric.
 
 ## [1.0.4] - 2025-08-05
 
@@ -60,7 +62,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 -   You can now configure the energy usage of the Wireless Crafting Grid's recipe transfer and autocrafting.
 -   You can now use the Wireless Crafting Grid without being connected to a network.
 
-[Unreleased]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v1.0.4...HEAD
+[Unreleased]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v1.0.5...HEAD
+
+[1.0.5]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v1.0.4...v1.0.5
 
 [1.0.4]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v1.0.3...v1.0.4
 
