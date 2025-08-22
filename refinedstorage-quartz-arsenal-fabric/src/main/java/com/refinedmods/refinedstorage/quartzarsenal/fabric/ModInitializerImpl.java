@@ -96,7 +96,7 @@ public class ModInitializerImpl extends AbstractModInitializer implements Refine
     private void registerEnergyItemProviders() {
         EnergyStorage.ITEM.registerForItems(
             (stack, context) ->
-                new EnergyStorageAdapter(Items.INSTANCE.getWirelessCraftingGrid().createEnergyStorage(stack)),
+                new EnergyStorageAdapter(Items.INSTANCE.getWirelessCraftingGrid().createEnergyStorage(stack), context),
             Items.INSTANCE.getWirelessCraftingGrid()
         );
     }
