@@ -303,18 +303,17 @@ class WirelessCraftingGrid implements CraftingGrid {
     }
 
     @Override
-    public CompletableFuture<Optional<TaskId>> startTask(final ResourceKey resourceKey,
-                                                         final long amount,
-                                                         final Actor actor,
-                                                         final boolean notify,
-                                                         final CancellationToken cancellationToken) {
+    public Optional<TaskId> startTask(final ResourceKey resourceKey,
+                                      final long amount,
+                                      final Actor actor,
+                                      final boolean notify,
+                                      final CancellationToken cancellationToken) {
         return getAutocrafting()
             .map(autocrafting -> autocrafting.startTask(resourceKey, amount, actor, notify,
                 cancellationToken))
-            .map(taskId -> {
+            .flatMap(taskId -> {
                 context.drainEnergy(Platform.getConfig().getWirelessCraftingGrid().getAutocraftingEnergyUsage());
                 return taskId;
-            })
-            .orElseGet(() -> CompletableFuture.completedFuture(Optional.empty()));
+            });
     }
 }
