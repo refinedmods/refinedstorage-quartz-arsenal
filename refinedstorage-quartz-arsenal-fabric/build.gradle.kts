@@ -45,5 +45,5 @@ dependencies {
     compileOnly(project(":refinedstorage-quartz-arsenal-common"))
     commonJava(project(path = ":refinedstorage-quartz-arsenal-common", configuration = "commonJava"))
     commonResources(project(path = ":refinedstorage-quartz-arsenal-common", configuration = "commonResources"))
-    modApi("com.refinedmods.refinedstorage:refinedstorage-fabric:${refinedstorageVersion}")
+    api("com.refinedmods.refinedstorage:refinedstorage-fabric:${refinedstorageVersion}")
 }

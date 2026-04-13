@@ -11,15 +11,17 @@ import com.refinedmods.refinedstorage.common.api.support.network.item.NetworkIte
 import com.refinedmods.refinedstorage.common.api.support.slotreference.SlotReference;
 import com.refinedmods.refinedstorage.common.grid.CraftingGrid;
 import com.refinedmods.refinedstorage.common.security.BuiltinPermission;
+import com.refinedmods.refinedstorage.quartzarsenal.common.ContentIds;
 import com.refinedmods.refinedstorage.quartzarsenal.common.ContentNames;
 import com.refinedmods.refinedstorage.quartzarsenal.common.Platform;
 
-import javax.annotation.Nullable;
-
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.jspecify.annotations.Nullable;
 
 import static java.util.Objects.requireNonNullElse;
 
@@ -29,8 +31,10 @@ public class WirelessCraftingGridItem extends AbstractNetworkEnergyItem {
     public WirelessCraftingGridItem(final boolean creative,
                                     final EnergyItemHelper energyItemHelper,
                                     final NetworkItemHelper networkItemHelper) {
-        super(
-            new Item.Properties().stacksTo(1),
+        super(new Item.Properties()
+                .stacksTo(1)
+                .setId(ResourceKey.create(Registries.ITEM,
+                    creative ? ContentIds.CREATIVE_WIRELESS_CRAFTING_GRID : ContentIds.WIRELESS_CRAFTING_GRID)),
             energyItemHelper,
             networkItemHelper
         );

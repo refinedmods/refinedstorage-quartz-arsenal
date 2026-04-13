@@ -1,8 +1,7 @@
 package com.refinedmods.refinedstorage.quartzarsenal.common;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.client.KeyMapping;
+import org.jspecify.annotations.Nullable;
 
 public final class KeyMappings {
     public static final KeyMappings INSTANCE = new KeyMappings();

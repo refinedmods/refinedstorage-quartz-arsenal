@@ -3,7 +3,7 @@ package com.refinedmods.refinedstorage.quartzarsenal.neoforge;
 import com.refinedmods.refinedstorage.common.api.RefinedStorageApi;
 import com.refinedmods.refinedstorage.common.content.ExtendedMenuTypeFactory;
 import com.refinedmods.refinedstorage.common.content.RegistryCallback;
-import com.refinedmods.refinedstorage.neoforge.support.energy.EnergyStorageAdapter;
+import com.refinedmods.refinedstorage.neoforge.support.energy.EnergyStorageEnergyHandlerAdapter;
 import com.refinedmods.refinedstorage.quartzarsenal.common.AbstractModInitializer;
 import com.refinedmods.refinedstorage.quartzarsenal.common.ContentIds;
 import com.refinedmods.refinedstorage.quartzarsenal.common.CreativeModeTabItems;
@@ -19,8 +19,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -55,7 +55,7 @@ public class ModInitializer extends AbstractModInitializer {
         final ConfigImpl config = new ConfigImpl();
         modContainer.registerConfig(ModConfig.Type.COMMON, config.getSpec());
         Platform.setConfigProvider(() -> config);
-        if (FMLEnvironment.dist == Dist.CLIENT) {
+        if (FMLEnvironment.getDist() == Dist.CLIENT) {
             eventBus.addListener(ClientModInitializer::onClientSetup);
             eventBus.addListener(ClientModInitializer::onRegisterMenuScreens);
             eventBus.addListener(ClientModInitializer::onRegisterKeyMappings);
@@ -136,8 +136,8 @@ public class ModInitializer extends AbstractModInitializer {
 
     private void registerEnergyItemProviders(final RegisterCapabilitiesEvent event) {
         event.registerItem(
-            Capabilities.EnergyStorage.ITEM,
-            (stack, ctx) -> new EnergyStorageAdapter(
+            Capabilities.Energy.ITEM,
+            (stack, ctx) -> new EnergyStorageEnergyHandlerAdapter(
                 Items.INSTANCE.getWirelessCraftingGrid().createEnergyStorage(stack)
             ),
             Items.INSTANCE.getWirelessCraftingGrid()
@@ -157,7 +157,7 @@ public class ModInitializer extends AbstractModInitializer {
 
     private record ForgeRegistryCallback<T>(DeferredRegister<T> registry) implements RegistryCallback<T> {
         @Override
-        public <R extends T> Supplier<R> register(final ResourceLocation id, final Supplier<R> value) {
+        public <R extends T> Supplier<R> register(final Identifier id, final Supplier<R> value) {
             return registry.register(id.getPath(), value);
         }
     }

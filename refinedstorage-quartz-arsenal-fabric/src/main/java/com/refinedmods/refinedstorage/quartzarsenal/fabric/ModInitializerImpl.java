@@ -16,8 +16,8 @@ import com.refinedmods.refinedstorage.quartzarsenal.common.wirelesscraftinggrid.
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -49,7 +49,7 @@ public class ModInitializerImpl extends AbstractModInitializer implements Refine
             public <T extends AbstractContainerMenu, D> MenuType<T> create(final MenuSupplier<T, D> supplier,
                                                                            final StreamCodec<RegistryFriendlyByteBuf, D>
                                                                                streamCodec) {
-                return new ExtendedScreenHandlerType<>(supplier::create, streamCodec);
+                return new ExtendedMenuType<>(supplier::create, streamCodec);
             }
         });
         registerDataComponents(new DirectRegistryCallback<>(BuiltInRegistries.DATA_COMPONENT_TYPE));
@@ -106,7 +106,7 @@ public class ModInitializerImpl extends AbstractModInitializer implements Refine
             Registries.CREATIVE_MODE_TAB,
             refinedStorageApi.getCreativeModeTabId()
         );
-        ItemGroupEvents.modifyEntriesEvent(creativeModeTab).register(
+        CreativeModeTabEvents.modifyOutputEvent(creativeModeTab).register(
             entries -> CreativeModeTabItems.addItems(entries::accept)
         );
     }
