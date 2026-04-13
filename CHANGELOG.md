@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+-   Translation for key mappings.
+
 ## [2.0.0] - 2026-04-13
 
 ### Added
