@@ -36,11 +36,11 @@
     }
   },
   "depends": {
-    "fabricloader": ">=0.14.6",
+    "fabricloader": "*",
     "fabric-api": "*",
-    "minecraft": "~1.21",
-    "refinedstorage": ">=2.0.0-beta.12",
-    "java": ">=21",
+    "minecraft": "~26.1",
+    "refinedstorage": ">=3.0.0-beta.1",
+    "java": ">=25",
     "cloth-config2": "*",
     "team_reborn_energy": "*"
   },

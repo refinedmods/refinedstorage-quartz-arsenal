@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "refinedstorage_quartz_arsenal:item/wireless_crafting_grid/inactive"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "refinedstorage_quartz_arsenal:item/wireless_crafting_grid/active"
+    },
+    "property": "refinedstorage:network_bound"
+  }
+}

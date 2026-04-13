@@ -3,9 +3,9 @@ package com.refinedmods.refinedstorage.quartzarsenal.common;
 import com.refinedmods.refinedstorage.quartzarsenal.common.wirelesscraftinggrid.WirelessCraftingGridContainerMenu;
 
 import java.util.function.Supplier;
-import javax.annotation.Nullable;
 
 import net.minecraft.world.inventory.MenuType;
+import org.jspecify.annotations.Nullable;
 
 import static java.util.Objects.requireNonNull;
 
