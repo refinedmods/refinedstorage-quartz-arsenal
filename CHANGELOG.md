@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+-   Missing crafting recipe for the Wireless Crafting Grid.
+
 ## [2.0.1] - 2026-04-13
 
 ### Fixed
