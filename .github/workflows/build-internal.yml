@@ -1,0 +1,13 @@
+name: Build
+on:
+  push:
+    branches:
+      - release/1.*
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      mutation-testing: false
+    secrets: inherit

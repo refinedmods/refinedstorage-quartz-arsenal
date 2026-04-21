@@ -19,6 +19,7 @@ import com.refinedmods.refinedstorage.api.storage.Actor;
 import com.refinedmods.refinedstorage.api.storage.NoopStorage;
 import com.refinedmods.refinedstorage.api.storage.Storage;
 import com.refinedmods.refinedstorage.api.storage.TrackedResourceAmount;
+import com.refinedmods.refinedstorage.common.api.RefinedStorageApi;
 import com.refinedmods.refinedstorage.common.api.security.PlatformSecurityNetworkComponent;
 import com.refinedmods.refinedstorage.common.api.storage.PlayerActor;
 import com.refinedmods.refinedstorage.common.api.support.network.item.NetworkItemContext;
@@ -235,7 +236,8 @@ class WirelessCraftingGrid implements CraftingGrid {
     @Override
     public boolean isGridActive() {
         final boolean networkActive = context.resolveNetwork()
-            .map(network -> network.getComponent(EnergyNetworkComponent.class).getStored() > 0)
+            .map(network -> !RefinedStorageApi.INSTANCE.isEnergyRequired()
+                || network.getComponent(EnergyNetworkComponent.class).getStored() > 0)
             .orElse(false);
         return networkActive && context.isActive();
     }

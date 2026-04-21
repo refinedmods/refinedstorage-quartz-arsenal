@@ -24,6 +24,7 @@ public class ConfigImpl implements ConfigData, Config {
     }
 
     private static class WirelessCraftingGridEntryEntryImpl implements WirelessCraftingGridEntry {
+        @ConfigEntry.BoundedDiscrete(min = 1L, max = Long.MAX_VALUE)
         private long energyCapacity = DefaultEnergyUsage.WIRELESS_CRAFTING_GRID_CAPACITY;
         private long openEnergyUsage = DefaultEnergyUsage.WIRELESS_CRAFTING_GRID_OPEN;
         private long craftingEnergyUsage = DefaultEnergyUsage.WIRELESS_CRAFTING_GRID_CRAFTING;
