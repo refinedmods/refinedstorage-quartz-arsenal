@@ -1,0 +1,19 @@
+name: Publish release
+on:
+  pull_request:
+    branches:
+      - support/1.x
+    types:
+      - closed
+jobs:
+  publish-release:
+    uses: ./.github/workflows/publish-release.yml
+    secrets: inherit
+    with:
+      project-name: 'Refined Storage - Quartz Arsenal'
+      announce: true
+      mutation-testing: false
+      sonarqube: true
+      javadoc: false
+      curseforge: true
+      modrinth: true
