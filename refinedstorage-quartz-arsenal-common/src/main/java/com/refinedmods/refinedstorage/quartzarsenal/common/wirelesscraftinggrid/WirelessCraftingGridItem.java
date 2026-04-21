@@ -39,7 +39,11 @@ public class WirelessCraftingGridItem extends AbstractNetworkEnergyItem {
 
     public EnergyStorage createEnergyStorage(final ItemStack stack) {
         final EnergyStorage energyStorage = new EnergyStorageImpl(
-            Platform.getConfig().getWirelessCraftingGrid().getEnergyCapacity()
+            Math.clamp(
+                Platform.getConfig().getWirelessCraftingGrid().getEnergyCapacity(),
+                1,
+                Long.MAX_VALUE
+            )
         );
         return RefinedStorageApi.INSTANCE.asItemEnergyStorage(energyStorage, stack);
     }
