@@ -42,7 +42,7 @@ public class ConfigImpl implements Config {
             builder.translation(translationKey("wirelessCraftingGrid")).push("wirelessCraftingGrid");
             energyCapacity = builder
                 .translation(translationKey("wirelessCraftingGrid.energyCapacity"))
-                .defineInRange("energyCapacity", DefaultEnergyUsage.WIRELESS_CRAFTING_GRID_CAPACITY, 0, Long.MAX_VALUE);
+                .defineInRange("energyCapacity", DefaultEnergyUsage.WIRELESS_CRAFTING_GRID_CAPACITY, 1, Long.MAX_VALUE);
             openEnergyUsage = builder
                 .translation(translationKey("wirelessCraftingGrid.openEnergyUsage"))
                 .defineInRange("openEnergyUsage", DefaultEnergyUsage.WIRELESS_CRAFTING_GRID_OPEN, 0, Long.MAX_VALUE);
