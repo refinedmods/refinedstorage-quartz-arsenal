@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+-   Wireless Crafting Grid still requiring energy even if Refined Storage is configured not to use energy.
+
 ## [2.0.2] - 2026-04-14
 
 ### Fixed
