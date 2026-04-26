@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.4] - 2026-04-26
+
 ### Fixed
 
 -   Compatibility with Refined Storage v3.0.0-beta.6.
@@ -97,7 +99,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 -   You can now configure the energy usage of the Wireless Crafting Grid's recipe transfer and autocrafting.
 -   You can now use the Wireless Crafting Grid without being connected to a network.
 
-[Unreleased]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v2.0.3...HEAD
+[Unreleased]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v2.0.4...HEAD
+
+[2.0.4]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v2.0.3...v2.0.4
 
 [2.0.3]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v2.0.2...v2.0.3
 
