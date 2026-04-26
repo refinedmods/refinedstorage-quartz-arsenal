@@ -25,7 +25,7 @@ import com.refinedmods.refinedstorage.common.api.storage.PlayerActor;
 import com.refinedmods.refinedstorage.common.api.support.network.item.NetworkItemContext;
 import com.refinedmods.refinedstorage.common.api.support.resource.PlatformResourceKey;
 import com.refinedmods.refinedstorage.common.api.support.resource.ResourceType;
-import com.refinedmods.refinedstorage.common.api.support.slotreference.SlotReference;
+import com.refinedmods.refinedstorage.common.api.support.slotreference.PlayerSlotReference;
 import com.refinedmods.refinedstorage.common.grid.CraftingGrid;
 import com.refinedmods.refinedstorage.common.grid.DirectCommitExtractTransaction;
 import com.refinedmods.refinedstorage.common.grid.ExtractTransaction;
@@ -62,20 +62,24 @@ class WirelessCraftingGrid implements CraftingGrid {
     private final GridWatcherManager watchers = new GridWatcherManagerImpl();
     @Nullable
     private final RecipeMatrix<CraftingRecipe, CraftingInput> craftingRecipe;
-    private final SlotReference slotReference;
+    private final PlayerSlotReference playerSlotReference;
 
-    WirelessCraftingGrid(final Player player, final NetworkItemContext context, final SlotReference slotReference) {
+    WirelessCraftingGrid(final Player player, final NetworkItemContext context,
+                         final PlayerSlotReference playerSlotReference) {
         this.level = player.level();
         this.context = context;
-        this.slotReference = slotReference;
-        this.craftingRecipe = createMatrix(player, () -> updateCraftingRecipe(player), slotReference);
+        this.playerSlotReference = playerSlotReference;
+        this.craftingRecipe = createMatrix(player, () -> updateCraftingRecipe(player), playerSlotReference);
     }
 
-    private static RecipeMatrix<CraftingRecipe, CraftingInput> createMatrix(final Player player,
-                                                                            final Runnable listener,
-                                                                            final SlotReference slotReference) {
+    private static RecipeMatrix<CraftingRecipe, CraftingInput> createMatrix(
+        final Player player,
+        final Runnable listener,
+        final PlayerSlotReference playerSlotReference
+    ) {
         final RecipeMatrix<CraftingRecipe, CraftingInput> recipe = RecipeMatrix.crafting(listener, player::level);
-        slotReference.resolve(player).ifPresent(stack -> setMatrixSlots(stack, recipe));
+        final ItemStack stack = playerSlotReference.get(player);
+        setMatrixSlots(stack, recipe);
         return recipe;
     }
 
@@ -102,10 +106,8 @@ class WirelessCraftingGrid implements CraftingGrid {
             return;
         }
         final CraftingInput.Positioned input = craftingRecipe.getMatrix().asPositionedCraftInput();
-        slotReference.resolve(player).ifPresent(stack -> stack.set(
-            DataComponents.INSTANCE.getWirelessCraftingGridState(),
-            new WirelessCraftingGridState(input)
-        ));
+        final ItemStack stack = playerSlotReference.get(player);
+        stack.set(DataComponents.INSTANCE.getWirelessCraftingGridState(), new WirelessCraftingGridState(input));
     }
 
     private Optional<StorageNetworkComponent> getStorage() {

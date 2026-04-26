@@ -5,10 +5,11 @@ import com.refinedmods.refinedstorage.api.network.impl.energy.EnergyStorageImpl;
 import com.refinedmods.refinedstorage.common.api.RefinedStorageApi;
 import com.refinedmods.refinedstorage.common.api.security.SecurityHelper;
 import com.refinedmods.refinedstorage.common.api.support.energy.AbstractNetworkEnergyItem;
+import com.refinedmods.refinedstorage.common.api.support.energy.EnergyItemContext;
 import com.refinedmods.refinedstorage.common.api.support.energy.EnergyItemHelper;
 import com.refinedmods.refinedstorage.common.api.support.network.item.NetworkItemContext;
 import com.refinedmods.refinedstorage.common.api.support.network.item.NetworkItemHelper;
-import com.refinedmods.refinedstorage.common.api.support.slotreference.SlotReference;
+import com.refinedmods.refinedstorage.common.api.support.slotreference.PlayerSlotReference;
 import com.refinedmods.refinedstorage.common.grid.CraftingGrid;
 import com.refinedmods.refinedstorage.common.security.BuiltinPermission;
 import com.refinedmods.refinedstorage.quartzarsenal.common.ContentIds;
@@ -28,20 +29,15 @@ import static java.util.Objects.requireNonNullElse;
 public class WirelessCraftingGridItem extends AbstractNetworkEnergyItem {
     private final boolean creative;
 
-    public WirelessCraftingGridItem(final boolean creative,
-                                    final EnergyItemHelper energyItemHelper,
+    public WirelessCraftingGridItem(final boolean creative, final EnergyItemHelper energyItemHelper,
                                     final NetworkItemHelper networkItemHelper) {
-        super(new Item.Properties()
-                .stacksTo(1)
-                .setId(ResourceKey.create(Registries.ITEM,
-                    creative ? ContentIds.CREATIVE_WIRELESS_CRAFTING_GRID : ContentIds.WIRELESS_CRAFTING_GRID)),
-            energyItemHelper,
-            networkItemHelper
-        );
+        super(new Item.Properties().stacksTo(1).setId(ResourceKey.create(Registries.ITEM,
+                creative ? ContentIds.CREATIVE_WIRELESS_CRAFTING_GRID : ContentIds.WIRELESS_CRAFTING_GRID)),
+            energyItemHelper, networkItemHelper);
         this.creative = creative;
     }
 
-    public EnergyStorage createEnergyStorage(final ItemStack stack) {
+    public static EnergyStorage createEnergyStorage(final ItemStack stack, final EnergyItemContext context) {
         final EnergyStorage energyStorage = new EnergyStorageImpl(
             Math.clamp(
                 Platform.getConfig().getWirelessCraftingGrid().getEnergyCapacity(),
@@ -49,13 +45,13 @@ public class WirelessCraftingGridItem extends AbstractNetworkEnergyItem {
                 Long.MAX_VALUE
             )
         );
-        return RefinedStorageApi.INSTANCE.asItemEnergyStorage(energyStorage, stack);
+        return RefinedStorageApi.INSTANCE.createItemEnergyStorage(energyStorage, stack, context);
     }
 
     @Override
     protected void use(@Nullable final Component name,
                        final ServerPlayer player,
-                       final SlotReference slotReference,
+                       final PlayerSlotReference playerSlotReference,
                        final NetworkItemContext context) {
         final boolean isAllowed = context.resolveNetwork()
             .map(network -> SecurityHelper.isAllowed(player, BuiltinPermission.OPEN, network))
@@ -64,12 +60,13 @@ public class WirelessCraftingGridItem extends AbstractNetworkEnergyItem {
             RefinedStorageApi.INSTANCE.sendNoPermissionToOpenMessage(player, ContentNames.WIRELESS_CRAFTING_GRID);
             return;
         }
-        final CraftingGrid craftingGrid = new WirelessCraftingGrid(player, context, slotReference);
+        final CraftingGrid craftingGrid = new WirelessCraftingGrid(player, context, playerSlotReference);
         final Component correctedName = requireNonNullElse(
             name,
             creative ? ContentNames.CREATIVE_WIRELESS_CRAFTING_GRID : ContentNames.WIRELESS_CRAFTING_GRID
         );
-        final var provider = new WirelessCraftingGridExtendedMenuProvider(correctedName, craftingGrid, slotReference);
+        final var provider = new WirelessCraftingGridExtendedMenuProvider(correctedName, craftingGrid,
+            playerSlotReference);
         com.refinedmods.refinedstorage.common.Platform.INSTANCE.getMenuOpener().openMenu(player, provider);
     }
 }

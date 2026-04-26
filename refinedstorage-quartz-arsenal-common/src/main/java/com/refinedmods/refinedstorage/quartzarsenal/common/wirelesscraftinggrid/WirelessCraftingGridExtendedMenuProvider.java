@@ -1,6 +1,6 @@
 package com.refinedmods.refinedstorage.quartzarsenal.common.wirelesscraftinggrid;
 
-import com.refinedmods.refinedstorage.common.api.support.slotreference.SlotReference;
+import com.refinedmods.refinedstorage.common.api.support.slotreference.PlayerSlotReference;
 import com.refinedmods.refinedstorage.common.grid.CraftingGrid;
 import com.refinedmods.refinedstorage.common.grid.GridData;
 import com.refinedmods.refinedstorage.common.support.containermenu.ExtendedMenuProvider;
@@ -15,21 +15,21 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 public class WirelessCraftingGridExtendedMenuProvider implements ExtendedMenuProvider<WirelessCraftingGridData> {
     private final Component name;
     private final CraftingGrid craftingGrid;
-    private final SlotReference slotReference;
+    private final PlayerSlotReference playerSlotReference;
 
     WirelessCraftingGridExtendedMenuProvider(final Component name,
                                              final CraftingGrid craftingGrid,
-                                             final SlotReference slotReference) {
+                                             final PlayerSlotReference playerSlotReference) {
         this.name = name;
         this.craftingGrid = craftingGrid;
-        this.slotReference = slotReference;
+        this.playerSlotReference = playerSlotReference;
     }
 
     @Override
     public WirelessCraftingGridData getMenuData() {
         return new WirelessCraftingGridData(
             GridData.of(craftingGrid),
-            slotReference
+            playerSlotReference
         );
     }
 
@@ -45,6 +45,6 @@ public class WirelessCraftingGridExtendedMenuProvider implements ExtendedMenuPro
 
     @Override
     public AbstractContainerMenu createMenu(final int syncId, final Inventory inventory, final Player player) {
-        return new WirelessCraftingGridContainerMenu(syncId, inventory, craftingGrid, slotReference);
+        return new WirelessCraftingGridContainerMenu(syncId, inventory, craftingGrid, playerSlotReference);
     }
 }

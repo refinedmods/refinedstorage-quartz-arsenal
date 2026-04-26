@@ -5,6 +5,7 @@ import com.refinedmods.refinedstorage.common.content.DirectRegistryCallback;
 import com.refinedmods.refinedstorage.common.content.ExtendedMenuTypeFactory;
 import com.refinedmods.refinedstorage.common.content.RegistryCallback;
 import com.refinedmods.refinedstorage.fabric.api.RefinedStoragePlugin;
+import com.refinedmods.refinedstorage.fabric.support.energy.ContainerItemContextEnergyItemContext;
 import com.refinedmods.refinedstorage.fabric.support.energy.EnergyStorageAdapter;
 import com.refinedmods.refinedstorage.quartzarsenal.common.AbstractModInitializer;
 import com.refinedmods.refinedstorage.quartzarsenal.common.ContentIds;
@@ -94,11 +95,9 @@ public class ModInitializerImpl extends AbstractModInitializer implements Refine
     }
 
     private void registerEnergyItemProviders() {
-        EnergyStorage.ITEM.registerForItems(
-            (stack, context) ->
-                new EnergyStorageAdapter(Items.INSTANCE.getWirelessCraftingGrid().createEnergyStorage(stack), context),
-            Items.INSTANCE.getWirelessCraftingGrid()
-        );
+        EnergyStorage.ITEM.registerForItems((stack, context) ->
+            new EnergyStorageAdapter(WirelessCraftingGridItem.createEnergyStorage(stack,
+                new ContainerItemContextEnergyItemContext(context))), Items.INSTANCE.getWirelessCraftingGrid());
     }
 
     private void registerCreativeModeTabListener(final RefinedStorageApi refinedStorageApi) {

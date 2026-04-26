@@ -4,6 +4,7 @@ import com.refinedmods.refinedstorage.common.api.RefinedStorageApi;
 import com.refinedmods.refinedstorage.common.content.ExtendedMenuTypeFactory;
 import com.refinedmods.refinedstorage.common.content.RegistryCallback;
 import com.refinedmods.refinedstorage.neoforge.support.energy.EnergyStorageEnergyHandlerAdapter;
+import com.refinedmods.refinedstorage.neoforge.support.energy.ItemAccessEnergyItemContext;
 import com.refinedmods.refinedstorage.quartzarsenal.common.AbstractModInitializer;
 import com.refinedmods.refinedstorage.quartzarsenal.common.ContentIds;
 import com.refinedmods.refinedstorage.quartzarsenal.common.CreativeModeTabItems;
@@ -138,7 +139,7 @@ public class ModInitializer extends AbstractModInitializer {
         event.registerItem(
             Capabilities.Energy.ITEM,
             (stack, ctx) -> new EnergyStorageEnergyHandlerAdapter(
-                Items.INSTANCE.getWirelessCraftingGrid().createEnergyStorage(stack)
+                WirelessCraftingGridItem.createEnergyStorage(stack, new ItemAccessEnergyItemContext(ctx))
             ),
             Items.INSTANCE.getWirelessCraftingGrid()
         );
