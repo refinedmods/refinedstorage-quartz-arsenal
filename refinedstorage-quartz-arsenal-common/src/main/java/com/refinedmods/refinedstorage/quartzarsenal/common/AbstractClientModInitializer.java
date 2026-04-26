@@ -14,7 +14,7 @@ public abstract class AbstractClientModInitializer {
         }
         final KeyMapping openWirelessCraftingGrid = KeyMappings.INSTANCE.getOpenWirelessCraftingGrid();
         while (openWirelessCraftingGrid != null && openWirelessCraftingGrid.consumeClick()) {
-            RefinedStorageApi.INSTANCE.useSlotReferencedItem(
+            RefinedStorageApi.INSTANCE.usePlayerSlotReferencedItem(
                 player,
                 Items.INSTANCE.getWirelessCraftingGrid(),
                 Items.INSTANCE.getCreativeWirelessCraftingGrid()

@@ -39,7 +39,7 @@
     "fabricloader": "*",
     "fabric-api": "*",
     "minecraft": "~26.1",
-    "refinedstorage": ">=3.0.0-beta.5",
+    "refinedstorage": ">=3.0.0-beta.6",
     "java": ">=25",
     "cloth-config2": "*",
     "team_reborn_energy": "*"

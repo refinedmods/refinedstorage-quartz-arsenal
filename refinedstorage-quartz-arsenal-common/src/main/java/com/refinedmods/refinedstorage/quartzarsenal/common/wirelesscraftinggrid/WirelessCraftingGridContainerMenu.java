@@ -1,6 +1,6 @@
 package com.refinedmods.refinedstorage.quartzarsenal.common.wirelesscraftinggrid;
 
-import com.refinedmods.refinedstorage.common.api.support.slotreference.SlotReference;
+import com.refinedmods.refinedstorage.common.api.support.slotreference.PlayerSlotReference;
 import com.refinedmods.refinedstorage.common.grid.AbstractCraftingGridContainerMenu;
 import com.refinedmods.refinedstorage.common.grid.CraftingGrid;
 import com.refinedmods.refinedstorage.quartzarsenal.common.Menus;
@@ -12,16 +12,16 @@ public class WirelessCraftingGridContainerMenu extends AbstractCraftingGridConta
                                              final Inventory playerInventory,
                                              final WirelessCraftingGridData gridData) {
         super(Menus.INSTANCE.getWirelessCraftingGrid(), syncId, playerInventory, gridData.gridData());
-        this.disabledSlot = gridData.slotReference();
+        this.disabledSlot = gridData.playerSlotReference();
         resized(0, 0, 0);
     }
 
     WirelessCraftingGridContainerMenu(final int syncId,
                                       final Inventory playerInventory,
                                       final CraftingGrid craftingGrid,
-                                      final SlotReference slotReference) {
+                                      final PlayerSlotReference playerSlotReference) {
         super(Menus.INSTANCE.getWirelessCraftingGrid(), syncId, playerInventory, craftingGrid);
-        this.disabledSlot = slotReference;
+        this.disabledSlot = playerSlotReference;
         resized(0, 0, 0);
     }
 }
