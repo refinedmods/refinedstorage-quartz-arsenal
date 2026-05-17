@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.5] - 2026-05-17
+
 ### Fixed
 
 -   Wireless Crafting Grid reporting duplicate amount of resources.
@@ -103,7 +105,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 -   You can now configure the energy usage of the Wireless Crafting Grid's recipe transfer and autocrafting.
 -   You can now use the Wireless Crafting Grid without being connected to a network.
 
-[Unreleased]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v2.0.4...HEAD
+[Unreleased]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v2.0.5...HEAD
+
+[2.0.5]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v2.0.4...v2.0.5
 
 [2.0.4]: https://github.com/refinedmods/refinedstorage-quartz-arsenal/compare/v2.0.3...v2.0.4
 
