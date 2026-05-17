@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+-   Wireless Crafting Grid reporting duplicate amount of resources.
+
 ## [2.0.4] - 2026-04-26
 
 ### Fixed
