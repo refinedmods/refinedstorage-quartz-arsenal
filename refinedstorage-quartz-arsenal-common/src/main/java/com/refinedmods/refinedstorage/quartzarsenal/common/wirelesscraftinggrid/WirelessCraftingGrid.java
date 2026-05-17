@@ -222,7 +222,7 @@ class WirelessCraftingGrid implements CraftingGrid {
 
     @Override
     public void removeWatcher(final GridWatcher watcher) {
-        final StorageNetworkComponent storage = context.resolveNetwork()
+        final StorageNetworkComponent storage = context.resolveNetwork(true)
             .map(network -> network.getComponent(StorageNetworkComponent.class))
             .orElse(null);
         watchers.removeWatcher(watcher, storage);
