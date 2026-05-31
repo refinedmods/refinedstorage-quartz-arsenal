@@ -3,6 +3,7 @@ package com.refinedmods.refinedstorage.quartzarsenal.common.wirelesscraftinggrid
 import com.refinedmods.refinedstorage.api.autocrafting.calculation.CancellationToken;
 import com.refinedmods.refinedstorage.api.autocrafting.preview.Preview;
 import com.refinedmods.refinedstorage.api.autocrafting.preview.TreePreview;
+import com.refinedmods.refinedstorage.api.autocrafting.status.TaskStatus;
 import com.refinedmods.refinedstorage.api.autocrafting.task.TaskId;
 import com.refinedmods.refinedstorage.api.core.Action;
 import com.refinedmods.refinedstorage.api.network.Network;
@@ -39,6 +40,7 @@ import com.refinedmods.refinedstorage.quartzarsenal.common.Platform;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -216,18 +218,26 @@ class WirelessCraftingGrid implements CraftingGrid {
     @Override
     public void addWatcher(final GridWatcher watcher, final Class<? extends Actor> actorType) {
         context.drainEnergy(Platform.getConfig().getWirelessCraftingGrid().getOpenEnergyUsage());
-        final StorageNetworkComponent storage = context.resolveNetwork()
+        final Optional<Network> optionalNetwork = context.resolveNetwork();
+        final StorageNetworkComponent storage = optionalNetwork
             .map(network -> network.getComponent(StorageNetworkComponent.class))
             .orElse(null);
-        watchers.addWatcher(watcher, actorType, storage);
+        final AutocraftingNetworkComponent autocrafting = optionalNetwork
+            .map(network -> network.getComponent(AutocraftingNetworkComponent.class))
+            .orElse(null);
+        watchers.addWatcher(watcher, actorType, storage, autocrafting);
     }
 
     @Override
     public void removeWatcher(final GridWatcher watcher) {
-        final StorageNetworkComponent storage = context.resolveNetwork(true)
+        final Optional<Network> optionalNetwork = context.resolveNetwork(true);
+        final StorageNetworkComponent storage = optionalNetwork
             .map(network -> network.getComponent(StorageNetworkComponent.class))
             .orElse(null);
-        watchers.removeWatcher(watcher, storage);
+        final AutocraftingNetworkComponent autocrafting = optionalNetwork
+            .map(network -> network.getComponent(AutocraftingNetworkComponent.class))
+            .orElse(null);
+        watchers.removeWatcher(watcher, storage, autocrafting);
     }
 
     @Override
@@ -258,6 +268,26 @@ class WirelessCraftingGrid implements CraftingGrid {
                 .map(PlatformResourceKey.class::cast)
                 .collect(Collectors.toSet()))
             .orElse(Collections.emptySet());
+    }
+
+    @Override
+    public Map<PlatformResourceKey, Set<TaskId>> getCurrentlyAutocrafting() {
+        return getAutocrafting().map(autocrafting -> autocrafting.getStatuses()
+            .stream()
+            .filter(status -> status.info().resource() instanceof PlatformResourceKey)
+            .collect(Collectors.groupingBy(
+                status -> (PlatformResourceKey) status.info().resource(),
+                Collectors.mapping(status -> status.info().id(), Collectors.toSet())
+            ))).orElse(Collections.emptyMap());
+    }
+
+    @Override
+    public List<TaskStatus> getAutocraftingTaskStatuses(final Set<TaskId> taskIds) {
+        return getAutocrafting().map(autocrafting -> autocrafting
+            .getStatuses()
+            .stream()
+            .filter(status -> taskIds.contains(status.info().id()))
+            .toList()).orElse(Collections.emptyList());
     }
 
     @Override
