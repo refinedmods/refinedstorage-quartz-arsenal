@@ -21,5 +21,5 @@
   "text.autoconfig.refinedstorage_quartz_arsenal.option.wirelessCraftingGrid.clearMatrixEnergyUsage": "매트릭스 비우기 에너지 사용량",
   "text.autoconfig.refinedstorage_quartz_arsenal.option.wirelessCraftingGrid.clearMatrixEnergyUsage.tooltip": "무선 제작 그리드의 제작 그리드를 비울 때 사용하는 에너지양입니다.",
   "text.autoconfig.refinedstorage_quartz_arsenal.option.wirelessCraftingGrid.recipeTransferEnergyUsage": "레시피 전송 에너지 사용량",
-  "text.autoconfig.refinedstorage_quartz_arsenal.option.wirelessCraftingGrid.recipeTransferEnergyUsage.tooltip": "The energy usage of transferring a recipe in the Wireless Crafting Grid."
+  "text.autoconfig.refinedstorage_quartz_arsenal.option.wirelessCraftingGrid.recipeTransferEnergyUsage.tooltip": "무선 제작 그리드에서 레시피를 전송할 때 사용하는 에너지양입니다."
 }
